@@ -41,7 +41,7 @@ jobs:
           CIBW_PLATFORM: pyodide
       - uses: actions/upload-artifact@v4
         with:
-          name: dist-pyodide
+          name: pyodide-wheel
           path: ./wheelhouse/*.whl
 
   build_sdist:
