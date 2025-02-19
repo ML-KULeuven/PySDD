@@ -114,6 +114,8 @@ include-dirs = [
 
 [tool.cibuildwheel]
 environment = {CFLAGS="-std=c99 -O2 -finline-functions" }
+test-requires = "pytest"
+test-command = "pytest {project}/tests"
 
 [tool.cibuildwheel.windows]
 environment = {CL = "/O2"}
