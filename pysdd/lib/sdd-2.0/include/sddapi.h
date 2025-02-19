@@ -31,7 +31,7 @@ typedef long long SddLiteral; //literals of clauses
 typedef char SddNodeType; //holds one of two values defined next
 
 //control strings
-#define PRIsS "zu"
+#define PRIsS "lli"
 #define PRInsS "u"
 #define PRIrcS "u"
 #define PRImcS "llu"
