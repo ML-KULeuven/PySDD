@@ -314,10 +314,10 @@ Vtree* sdd_vtree_minimize_limited(Vtree* vtree, SddManager* manager);
 
 void sdd_manager_set_vtree_search_convergence_threshold(float threshold, SddManager* manager);
 
-void sdd_manager_set_vtree_search_time_limit(float time_limit, SddManager* manager);
-void sdd_manager_set_vtree_fragment_time_limit(float time_limit, SddManager* manager);
-void sdd_manager_set_vtree_operation_time_limit(float time_limit, SddManager* manager);
-void sdd_manager_set_vtree_apply_time_limit(float time_limit, SddManager* manager);
+void sdd_manager_set_vtree_search_time_limit(clock_t time_limit, SddManager* manager);
+void sdd_manager_set_vtree_fragment_time_limit(clock_t time_limit, SddManager* manager);
+void sdd_manager_set_vtree_operation_time_limit(clock_t time_limit, SddManager* manager);
+void sdd_manager_set_vtree_apply_time_limit(clock_t time_limit, SddManager* manager);
 void sdd_manager_set_vtree_operation_memory_limit(float memory_limit, SddManager* manager);
 void sdd_manager_set_vtree_operation_size_limit(float size_limit, SddManager* manager);
 void sdd_manager_set_vtree_cartesian_product_limit(SddSize size_limit, SddManager* manager);

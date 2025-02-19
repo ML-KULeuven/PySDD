@@ -17,6 +17,7 @@ from . cimport io_c
 from . cimport fnf_c
 from cpython cimport array
 from cpython.mem cimport PyMem_Malloc, PyMem_Free
+from libc.time cimport clock_t
 
 import os
 import tempfile
@@ -1034,7 +1035,7 @@ cdef class SddManager:
     def set_vtree_search_convergence_threshold(self, float threshold):
         sddapi_c.sdd_manager_set_vtree_search_convergence_threshold(threshold, self._sddmanager)
 
-    def set_vtree_search_time_limit(self, float time_limit):
+    def set_vtree_search_time_limit(self, clock_t time_limit):
         """Set the time limits for the vtree search algorithm.
 
         A vtree operation is either a rotation or a swap. Times are in seconds and correspond to CPU time.
@@ -1042,7 +1043,7 @@ cdef class SddManager:
         """
         sddapi_c.sdd_manager_set_vtree_search_time_limit(time_limit, self._sddmanager)
 
-    def set_vtree_fragment_time_limit(self, float time_limit):
+    def set_vtree_fragment_time_limit(self, clock_t time_limit):
         """Set the time limits for the vtree search algorithm.
 
         A vtree operation is either a rotation or a swap. Times are in seconds and correspond to CPU time.
@@ -1050,7 +1051,7 @@ cdef class SddManager:
         """
         sddapi_c.sdd_manager_set_vtree_fragment_time_limit(time_limit, self._sddmanager)
 
-    def set_vtree_operation_time_limit(self, float time_limit):
+    def set_vtree_operation_time_limit(self, clock_t time_limit):
         """Set the time limits for the vtree search algorithm.
 
         A vtree operation is either a rotation or a swap. Times are in seconds and correspond to CPU time.
@@ -1058,7 +1059,7 @@ cdef class SddManager:
         """
         sddapi_c.sdd_manager_set_vtree_operation_time_limit(time_limit, self._sddmanager)
 
-    def set_vtree_apply_time_limit(self, float time_limit):
+    def set_vtree_apply_time_limit(self, clock_t time_limit):
         """Set the time limits for the vtree search algorithm.
 
         A vtree operation is either a rotation or a swap. Times are in seconds and correspond to CPU time.

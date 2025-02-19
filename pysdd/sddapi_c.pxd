@@ -7,6 +7,7 @@ pysdd.sddapi_c
 :copyright: Copyright 2017-2018 KU Leuven and Regents of the University of California.
 :license: Apache License, Version 2.0, see LICENSE for details.
 """
+from libc.time cimport clock_t
 cdef extern from "sddapi.h":
     ctypedef size_t SddSize;  # TODO: only for 64bit
     ctypedef size_t SddNodeSize
@@ -211,10 +212,10 @@ cdef extern from "sddapi.h":
 
     void sdd_manager_set_vtree_search_convergence_threshold(float threshold, SddManager* manager);
 
-    void sdd_manager_set_vtree_search_time_limit(float time_limit, SddManager* manager);
-    void sdd_manager_set_vtree_fragment_time_limit(float time_limit, SddManager* manager);
-    void sdd_manager_set_vtree_operation_time_limit(float time_limit, SddManager* manager);
-    void sdd_manager_set_vtree_apply_time_limit(float time_limit, SddManager* manager);
+    void sdd_manager_set_vtree_search_time_limit(clock_t time_limit, SddManager* manager);
+    void sdd_manager_set_vtree_fragment_time_limit(clock_t time_limit, SddManager* manager);
+    void sdd_manager_set_vtree_operation_time_limit(clock_t time_limit, SddManager* manager);
+    void sdd_manager_set_vtree_apply_time_limit(clock_t time_limit, SddManager* manager);
     void sdd_manager_set_vtree_operation_memory_limit(float memory_limit, SddManager* manager);
     void sdd_manager_set_vtree_operation_size_limit(float size_limit, SddManager* manager);
     void sdd_manager_set_vtree_cartesian_product_limit(SddSize size_limit, SddManager* manager);
