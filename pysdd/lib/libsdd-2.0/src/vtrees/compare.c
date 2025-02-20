@@ -52,9 +52,9 @@ Vtree* sdd_vtree_lca(Vtree* vtree1, Vtree* vtree2, Vtree* root) {
 Vtree* sdd_manager_lca_of_literals(int count, SddLiteral* literals, SddManager* manager) {
   assert(count>0);
   Vtree* root  = manager->vtree;
-  Vtree* vtree = sdd_manager_vtree_of_var(labs(literals[0]),manager); 
+  Vtree* vtree = sdd_manager_vtree_of_var(llabs(literals[0]),manager); 
   for(int i=1; i<count; i++) {
-    Vtree* leaf = sdd_manager_vtree_of_var(labs(literals[i]),manager); 
+    Vtree* leaf = sdd_manager_vtree_of_var(llabs(literals[i]),manager); 
     vtree       = sdd_vtree_lca(vtree,leaf,root);
   }
   return vtree;
