@@ -31,11 +31,12 @@ typedef long long SddLiteral; //literals of clauses
 typedef char SddNodeType; //holds one of two values defined next
 
 //control strings
-#define PRIsS "lli"
-#define PRInsS "u"
-#define PRIrcS "u"
-#define PRImcS "llu"
-#define PRIlitS "ld"
+#define PRIsS "zu" // SddSize
+#define PRInsS "zu" // SddNodeSize
+#define PRIrcS "zu" // SddRefCount
+#define PRImcS "llu" //SddModelCount
+#define PRIwmcS "f" // SddWmc
+#define PRIlitS "lli" //SddLiteral
 
 typedef SddSize SddID;
 

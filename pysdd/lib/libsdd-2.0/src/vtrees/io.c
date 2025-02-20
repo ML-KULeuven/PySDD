@@ -38,12 +38,12 @@ Vtree* sdd_vtree_read(const char* filename) {
 //prints a vtree node
 void print_vtree_node(FILE* file, const Vtree* vnode) {
   if(LEAF(vnode)) {
-    fprintf(file,"L %"PRIsS" %"PRIlitS"",vnode->position,vnode->var);
+    fprintf(file,"L %"PRIlitS" %"PRIlitS"",vnode->position,vnode->var);
   } 
   else { // internal node
     print_vtree_node(file,vnode->left);
     print_vtree_node(file,vnode->right);
-    fprintf(file,"I %"PRIsS" %"PRIsS" %"PRIsS"",vnode->position,vnode->left->position,vnode->right->position);
+    fprintf(file,"I %"PRIlitS" %"PRIlitS" %"PRIlitS"",vnode->position,vnode->left->position,vnode->right->position);
   }
   fprintf(file,"\n");
 }
@@ -66,7 +66,7 @@ void print_vtree_header(FILE* file) {
 void print_vtree(FILE* file, const Vtree* vtree) {
   SddLiteral count = 2*(vtree->var_count) -1;
   print_vtree_header(file);
-  fprintf(file,"vtree %"PRIsS"\n",count);
+  fprintf(file,"vtree %"PRIlitS"\n",count);
   print_vtree_node(file,vtree);
 }
 
@@ -91,13 +91,13 @@ void print_vtree_nodes_as_dot(FILE* file, const Vtree* vtree) {
   if(LEAF(vtree)) {
     SddLiteral var = vtree->var;
     char* var_string = literal_to_label(var);
-    fprintf(file,"\nn%"PRIsS" [label=\"%s\",fontname=\"Times-Italic\","
+    fprintf(file,"\nn%"PRIlitS" [label=\"%s\",fontname=\"Times-Italic\","
             "fontsize=14,shape=\"%s\",fixedsize=true,width=.25,height=.25"
             "]; ",position,var_string,shape);
     free(var_string);
   } 
   else {
-    fprintf(file,"\nn%"PRIsS" [label=\"%"PRIsS"\",fontname=\"Times\","
+    fprintf(file,"\nn%"PRIlitS" [label=\"%"PRIsS"\",fontname=\"Times\","
            "shape=\"%s\",fontsize=12,fixedsize=true,width=.2,height=.18]; ",
            position,position,shape);
     print_vtree_nodes_as_dot(file,vtree->left);
@@ -110,14 +110,14 @@ void print_vtree_edges_as_dot(FILE* file, const Vtree* vtree, const Vtree* paren
   if(LEAF(vtree)) {
     if(parent != NULL) {
       SddLiteral parent_position = vtree->parent->position;
-      fprintf(file,"\nn%"PRIsS"->n%"PRIsS" [headclip=true,arrowhead=none,headlabel=\"%"PRIsS"\","
+      fprintf(file,"\nn%"PRIlitS"->n%"PRIlitS" [headclip=true,arrowhead=none,headlabel=\"%"PRIlitS"\","
               "labelfontname=\"Times\",labelfontsize=10];",parent_position,position,position);
     }
   } 
   else { //internal node
     if(parent != NULL) {
       SddLiteral parent_position = vtree->parent->position;
-      fprintf(file,"\nn%"PRIsS"->n%"PRIsS" [arrowhead=none];",parent_position,position);
+      fprintf(file,"\nn%"PRIlitS"->n%"PRIlitS" [arrowhead=none];",parent_position,position);
     }
     print_vtree_edges_as_dot(file,vtree->left,vtree);
     print_vtree_edges_as_dot(file,vtree->right,vtree); // right first?
