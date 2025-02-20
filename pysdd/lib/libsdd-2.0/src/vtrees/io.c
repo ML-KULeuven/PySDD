@@ -97,7 +97,7 @@ void print_vtree_nodes_as_dot(FILE* file, const Vtree* vtree) {
     free(var_string);
   } 
   else {
-    fprintf(file,"\nn%"PRIlitS" [label=\"%"PRIsS"\",fontname=\"Times\","
+    fprintf(file,"\nn%"PRIlitS" [label=\"%"PRIlitS"\",fontname=\"Times\","
            "shape=\"%s\",fontsize=12,fixedsize=true,width=.2,height=.18]; ",
            position,position,shape);
     print_vtree_nodes_as_dot(file,vtree->left);
