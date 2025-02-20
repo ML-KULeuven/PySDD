@@ -4,18 +4,18 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "PySDD"
-version = "1.0.1"
+version = "1.0.2"
 description = "Sentential Decision Diagrams"
 authors = [
     { name = "Wannes Meert", email = "wannes.meert@cs.kuleuven.be" },
     { name = "Arthur Choi" },
+    { name = "Robin Manhaeve", email = "robin.manhaeve@kuleuven.be" },
 ]
 readme = "README.rst"
 license = { file = "LICENSE" }
 requires-python = ">=3.8"
 dependencies = [
     "cython",
-    "numpy",
 ]
 keywords = ["sdd, knowledge compilation"]
 classifiers = [
@@ -27,7 +27,7 @@ classifiers = [
 
 [project.optional-dependencies]
 tests = ["pytest"]
-
+notebooks = ["numpy"]
 
 
 [project.urls]
