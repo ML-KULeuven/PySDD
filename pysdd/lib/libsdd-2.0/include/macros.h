@@ -65,7 +65,7 @@
 //recovering fields of nodes
 #define ELEMENTS_OF(N) (N)->alpha.elements
 #define LITERAL_OF(N) (N)->alpha.literal
-#define VAR_OF(N) labs((N)->alpha.literal)
+#define VAR_OF(N) llabs((N)->alpha.literal)
 
 //checking whether an sdd node is live
 //terminal sdds are always live

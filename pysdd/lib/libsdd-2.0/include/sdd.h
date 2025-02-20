@@ -34,13 +34,13 @@ typedef double SddWmc; // weighted model count
 typedef long long SddLiteral; //literals of clauses
 
 //control strings
-#define PRIsS "lli"
-#define PRInsS "u"
-#define PRIrcS "u"
-#define PRImcS "llu"
-#define PRIwmcS "f"
-#define PRIlitS "ld"
- 
+#define PRIsS "zu" // SddSize
+#define PRInsS "zu" // SddNodeSize
+#define PRIrcS "zu" // SddRefCount
+#define PRImcS "llu" //SddModelCount
+#define PRIwmcS "f" // SddWmc
+#define PRIlitS "lli" //SddLiteral
+
 /****************************************************************************************
  * Enumerated Types
  ****************************************************************************************/

@@ -56,7 +56,7 @@ static inline
 SddSize balance(Vtree* vtree, SddManager* manager) {
   SddLiteral left_count  = sdd_vtree_var_count(sdd_vtree_left(vtree));
   SddLiteral right_count = sdd_vtree_var_count(sdd_vtree_right(vtree));
-  return labs(left_count - right_count);
+  return llabs(left_count - right_count);
 }
 
 /****************************************************************************************
