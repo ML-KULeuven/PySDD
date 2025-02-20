@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "PySDD"
-version = "1.0.3"
+version = "1.0.4"
 description = "Sentential Decision Diagrams"
 authors = [
     { name = "Wannes Meert", email = "wannes.meert@cs.kuleuven.be" },
@@ -113,10 +113,10 @@ include-dirs = [
 ]
 
 [tool.cibuildwheel]
-environment = {CFLAGS="-std=c99 -O2 -finline-functions" }
+environment = {CFLAGS="-O3 -DNDEBUG" }
 test-requires = "pytest"
 test-command = "pytest {project}/tests"
 
 [tool.cibuildwheel.windows]
-environment = {CL = "/O2"}
+environment = {CL = "/O2 /DNDEBUG"}
 
