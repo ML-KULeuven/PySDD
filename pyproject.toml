@@ -116,6 +116,7 @@ include-dirs = [
 environment = {CFLAGS="-O3 -DNDEBUG" }
 test-requires = "pytest"
 test-command = "pytest {project}/tests"
+skip = "pp*"
 
 [tool.cibuildwheel.windows]
 environment = {CL = "/O2 /DNDEBUG"}
