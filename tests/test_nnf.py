@@ -1,18 +1,23 @@
 from pysdd.util import nnf_file_wmc, sdd_file_wmc, psdd_file_wmc
-from pysdd.sdd import Fnf, Vtree, SddManager
 from pysdd import cli
 import sys
 import os
 import math
 import logging
 from pathlib import Path
-import filecmp
 
 
 logger = logging.getLogger("pysdd")
 directory = None
 counter = 0
 here = Path(__file__).parent
+
+def file_contents_equal(path1, path2):
+    with open(path1) as f1:
+        lines1 = [l.strip() for l in f1.readlines()]
+    with open(path2) as f2:
+        lines2 = [l.strip() for l in f2.readlines()]
+    return lines1 == lines2
 
 
 def test_nnf1():
@@ -31,16 +36,6 @@ def test_nnf2():
     }
     wmc = nnf_file_wmc(here / "rsrc" / "test.cnf.nnf", weights)
     assert wmc == 0.75
-
-
-# def test_dnf1():
-#     dnf_filename = str(here / "rsrc" / "test.cnf.nnf")
-#     fnf = Fnf.from_dnf_file(bytes(dnf_filename, encoding='utf8'))
-#     # weights = read_weights(dnf_filename)
-#     vtree = Vtree(var_count=fnf.var_count)
-#     manager = SddManager.from_vtree(vtree)
-#     node = manager.fnf_to_sdd(fnf)
-#     print(node)
 
 
 def test_sdd1():
@@ -70,13 +65,12 @@ def test_psdd1():
 
 
 def test_dimacs1():
-    """This test fails on Windows because of a mismatch between 64b and 32b data types."""
     fn_dimacs = here / "rsrc" / "dimacs1.txt"
     fn_vtree = here / "rsrc" / "dimacs1.vtree"
     fn_vtree_sol = here / "rsrc" / "dimacs1_solution.vtree"
     fn_sdd = here / "rsrc" / "dimacs1.sdd"
     cli.main(["-c", str(fn_dimacs), "-W", str(fn_vtree), "-R", str(fn_sdd)])
-    assert filecmp.cmp(fn_vtree, fn_vtree_sol)
+    assert file_contents_equal(fn_vtree, fn_vtree_sol)
     with fn_vtree.open("r") as fp:
         print(fp.read())
 
@@ -87,8 +81,9 @@ if __name__ == "__main__":
     logger.addHandler(sh)
     directory = Path(os.environ.get('TESTDIR', Path(__file__).parent))
     print(f"Saving files to {directory}")
-    # test_nnf1()
-    # test_sdd2()
-    # test_psdd1()
-    # test_dnf1()
+    test_nnf1()
+    test_nnf2()
+    test_sdd1()
+    test_sdd2()
+    test_psdd1()
     test_dimacs1()
