@@ -8,7 +8,7 @@ pysdd.sddapi_c
 :license: Apache License, Version 2.0, see LICENSE for details.
 """
 from libc.time cimport clock_t
-cdef extern from "sddapi.h":
+cdef extern from "sdd.h":
     ctypedef size_t SddSize;  # TODO: only for 64bit
     ctypedef size_t SddNodeSize
     ctypedef size_t SddRefCount
@@ -230,8 +230,6 @@ cdef extern from "sddapi.h":
     SddWmc wmc_literal_weight(const SddLiteral literal, const WmcManager* wmc_manager);
     SddWmc wmc_literal_derivative(const SddLiteral literal, const WmcManager* wmc_manager);
     SddWmc wmc_literal_pr(const SddLiteral literal, const WmcManager* wmc_manager);
-
-cdef extern from "sddapi_extra.h":
     void add_var_before_lca(int count, SddLiteral* literals, SddManager* manager);
     void add_var_after_lca(int count, SddLiteral* literals, SddManager* manager);
     void move_var_before_first(SddLiteral var, SddManager* manager);
