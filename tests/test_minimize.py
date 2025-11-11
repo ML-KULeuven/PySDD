@@ -74,6 +74,22 @@ def test_min2():
         # with (directory / "sdd2_before_b.gv").open("w") as out:
         #     print(sdd_to_dot(sdd), file=out)
 
+def test_refcount():
+    sdd = SddManager(var_count=2)
+    a, b = sdd.vars
+    f = a | b
+    assert f.ref_count() == 1
+    f.ref()
+    assert f.ref_count() == 2
+    f.deref()
+    assert f.ref_count() == 1
+    # equivalent formula will
+    # ref same formula object
+    f2 = b | a
+    assert f2.ref_count() == 2
+    assert f.ref_count() == 2
+    del f2
+    assert f.ref_count() == 1
 
 if __name__ == "__main__":
     logger.setLevel(logging.DEBUG)
