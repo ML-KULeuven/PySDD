@@ -3,7 +3,7 @@ name: Python PySDD package
 on:
   workflow_dispatch:
   pull_request:
-    branches: [main]
+    branches: [master]
   release:
     types: [published]
 jobs:
