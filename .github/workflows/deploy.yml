@@ -2,9 +2,10 @@ name: Python PySDD package
 
 on:
   workflow_dispatch:
+  pull_request:
+    branches: [main]
   release:
     types: [published]
-
 jobs:
   build_wheels:
     name: Build wheels on ${{ matrix.os }}
