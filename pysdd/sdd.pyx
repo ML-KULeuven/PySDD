@@ -53,6 +53,7 @@ cdef class SddNode:
         wrapper._sddnode = node
         if wrapper.garbage_collected():
             return None
+        wrapper.ref()
         if sddapi_c.sdd_node_is_literal(node):
             wrapper._name = sddapi_c.sdd_node_literal(node)
         elif sddapi_c.sdd_node_is_true(node):
@@ -63,6 +64,9 @@ cdef class SddNode:
             wrapper._name = "Decision"
         return wrapper
 
+    def __del__(self):
+        # clean up _sddnode ref
+        self.deref()
 
     @property
     def id(self):
@@ -306,7 +310,6 @@ cdef class SddNode:
 
         Returns the node.
         """
-        # TODO: Should we ref every Python SDDNode object on creation and deref on Python GC?
         sddapi_c.sdd_ref(self._sddnode, self._manager._sddmanager)
 
     def deref(self):
