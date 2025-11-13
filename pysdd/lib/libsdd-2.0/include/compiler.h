@@ -8,21 +8,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "sddapi.h"
+#include "sdd.h"
 
 /****************************************************************************************
  * this file contains macros, definitions of structures, and forward references
  * used by the fnf-to-sdd compiler (auto and manual versions)
  ****************************************************************************************/
 
-/****************************************************************************************
- * macros 
- ****************************************************************************************/
- 
-//M: manager
-//V: vtree
-#define ZERO(M,OP) (OP==CONJOIN? sdd_manager_false(M): sdd_manager_true(M))
-#define ONE(M,OP) (OP==CONJOIN? sdd_manager_true(M): sdd_manager_false(M))
+
 
 /****************************************************************************************
  * compiler options: populated by main.c using command-line arguments
@@ -61,21 +54,7 @@ typedef struct {
  * this struct should not be changed as it is also defined in the sdd library
  ****************************************************************************************/
  
-typedef struct {
-  SddSize id;
-  SddLiteral literal_count;
-  SddLiteral* literals; 
-  BoolOp op; //DISJOIN (clause) or CONJOIN (term)
-  Vtree* vtree;
-  unsigned bit:1;
-} LitSet;
 
-typedef struct {
-  SddLiteral var_count; // number of variables
-  SddSize litset_count; // number of literal sets
-  LitSet* litsets;  // array of literal sets
-  BoolOp op; //CONJOIN (CNF) or DISJOIN (DNF)
-} Fnf;
 
 typedef Fnf Cnf;
 typedef Fnf Dnf;
