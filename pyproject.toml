@@ -101,15 +101,13 @@ sources = [
     "pysdd/lib/libsdd-2.0/src/vtrees/moves.c",
     "pysdd/lib/libsdd-2.0/src/vtrees/static.c",
     "pysdd/lib/libsdd-2.0/src/vtrees/vtree.c",
-    "pysdd/lib/sdd-2.0/src/fnf/compiler.c",
-    "pysdd/lib/sdd-2.0/src/fnf/fnf.c",
-    "pysdd/lib/sdd-2.0/src/fnf/io.c",
-    "pysdd/lib/sdd-2.0/src/fnf/utils.c",
+    "pysdd/lib/libsdd-2.0/src/fnf/compiler.c",
+    "pysdd/lib/libsdd-2.0/src/fnf/fnf.c",
+    "pysdd/lib/libsdd-2.0/src/fnf/io.c",
+    "pysdd/lib/libsdd-2.0/src/fnf/utils.c",
 ]
 include-dirs = [
     "pysdd/lib/libsdd-2.0/include",
-    "pysdd/lib/sdd-2.0/include",
-    "pysdd/lib/sdd_extra/include",
 ]
 
 [tool.cibuildwheel]

@@ -6,86 +6,86 @@
  ****************************************************************************************/
 
 #include <string.h>
-#include "sddapi.h"
+#include "sdd.h"
 #include "compiler.h"
 #include "io.h"
 
 //local declarations
 static Fnf* parse_fnf_file(char* buffer);
 
-/****************************************************************************************
- * general file reading
- ****************************************************************************************/
+// /****************************************************************************************
+//  * general file reading
+//  ****************************************************************************************/
 
-//Reads a file given filename.  Returns a cstring of length the size of the file
-static char* read_file(const char* filename) {
-  FILE *file = fopen(filename, "rb");
-  if (file == NULL) {
-    printf("Could not open the file %s\n",filename);
-    exit(1);
-  }
+// //Reads a file given filename.  Returns a cstring of length the size of the file
+// static char* read_file(const char* filename) {
+//   FILE *file = fopen(filename, "rb");
+//   if (file == NULL) {
+//     printf("Could not open the file %s\n",filename);
+//     exit(1);
+//   }
 
-  // lookup file size
-  fseek(file,0,SEEK_END);
-  size_t file_size = ftell(file);
-  rewind(file);
+//   // lookup file size
+//   fseek(file,0,SEEK_END);
+//   size_t file_size = ftell(file);
+//   rewind(file);
 
-  // allocate memory
-  char* buffer = (char*)calloc(file_size+1,sizeof(char));
+//   // allocate memory
+//   char* buffer = (char*)calloc(file_size+1,sizeof(char));
 
-  // read the whole file
-  size_t result = fread(buffer,sizeof(char),file_size,file);
-  if (result != file_size) {
-    printf("Could not read the file %s\n",filename);
-    exit(1);
-  }
-  buffer[file_size] = 0; // null terminate
+//   // read the whole file
+//   size_t result = fread(buffer,sizeof(char),file_size,file);
+//   if (result != file_size) {
+//     printf("Could not read the file %s\n",filename);
+//     exit(1);
+//   }
+//   buffer[file_size] = 0; // null terminate
 
-  fclose(file);
-  return buffer;
-}
+//   fclose(file);
+//   return buffer;
+// }
 
 //Filters commented lines (beginning with 'c') and returns a cstring
 //whose length is the length of the resulting file
-static char* filter_comments(const char* buffer) {
-  int is_comment_line, is_eol;
-  unsigned int file_length = 0, line_length;
-  const char* read_head = buffer;
-  char* write_head;
+// static char* filter_comments(const char* buffer) {
+//   int is_comment_line, is_eol;
+//   unsigned int file_length = 0, line_length;
+//   const char* read_head = buffer;
+//   char* write_head;
 
-  // count size of filtered string
-  while (*read_head != '\0') {
-    is_comment_line = (*read_head == 'c');
-    line_length = 0;
-    while (*read_head != '\0') {
-      is_eol = (*read_head == '\n');
-      read_head++;
-      line_length++;
-      if (is_eol) break;
-    }
-    if (!is_comment_line)
-      file_length += line_length;
-  }
+//   // count size of filtered string
+//   while (*read_head != '\0') {
+//     is_comment_line = (*read_head == 'c');
+//     line_length = 0;
+//     while (*read_head != '\0') {
+//       is_eol = (*read_head == '\n');
+//       read_head++;
+//       line_length++;
+//       if (is_eol) break;
+//     }
+//     if (!is_comment_line)
+//       file_length += line_length;
+//   }
 
-  // copy filtered string
-  char* filtered = (char*)calloc(file_length+1,sizeof(char));
-  read_head = buffer;
-  write_head = filtered;
-  while (*read_head != '\0') {
-    is_comment_line = (*read_head == 'c');
-    while (*read_head != '\0') {
-      is_eol = (*read_head == '\n');
-      if (!is_comment_line) {
-        *write_head = *read_head;
-        write_head++;
-      }
-      read_head++;
-      if (is_eol) break;
-    }
-  }
-  *write_head = '\0';
-  return filtered;
-}
+//   // copy filtered string
+//   char* filtered = (char*)calloc(file_length+1,sizeof(char));
+//   read_head = buffer;
+//   write_head = filtered;
+//   while (*read_head != '\0') {
+//     is_comment_line = (*read_head == 'c');
+//     while (*read_head != '\0') {
+//       is_eol = (*read_head == '\n');
+//       if (!is_comment_line) {
+//         *write_head = *read_head;
+//         write_head++;
+//       }
+//       read_head++;
+//       if (is_eol) break;
+//     }
+//   }
+//   *write_head = '\0';
+//   return filtered;
+// }
 
 /****************************************************************************************
  * reading fnf files
