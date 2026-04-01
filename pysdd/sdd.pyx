@@ -17,6 +17,7 @@ from . cimport io_c
 from . cimport fnf_c
 from cpython cimport array
 from cpython.mem cimport PyMem_Malloc, PyMem_Free
+from cpython.pycapsule cimport PyCapsule_New
 from libc.time cimport clock_t
 
 import os
@@ -355,6 +356,12 @@ cdef class SddNode:
     def __eq__(SddNode self, SddNode other):
         return self._sddnode == other._sddnode
 
+    # Cross-Extension Interoperability
+
+    @property
+    def _capsule(self):
+        """export the underlying SddNode* as a PyCapsule for cross-extension interop."""
+        return PyCapsule_New(<void*>self._sddnode, "SddNode*", NULL)
 
 @cython.embedsignature(True)
 cdef class SddManager:
