@@ -1,0 +1,5 @@
+# The sdist must hold what the build needs: setuptools adds the .pyx and .c
+# sources listed in pyproject.toml, but not the .pxd files sdd.pyx cimports
+# or the C headers in the include dirs.
+include pysdd/*.pxd
+recursive-include pysdd/lib *.h
