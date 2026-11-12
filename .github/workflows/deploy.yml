@@ -27,7 +27,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
       - name: Build wheels
-        uses: pypa/cibuildwheel@v3.3.0
+        uses: pypa/cibuildwheel@v4.3.5
         env:
           CIBW_ARCHS_WINDOWS: auto ARM64
       - uses: actions/upload-artifact@v4
