@@ -21,13 +21,13 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        os: [windows-latest, ubuntu-latest, macos-15-intel, macos-14, ubuntu-24.04-arm]
+        os: [windows-latest, ubuntu-latest, macos-15-intel, macos-15, ubuntu-24.04-arm]
       fail-fast: true
 
     steps:
       - uses: actions/checkout@v5
       - name: Build wheels
-        uses: pypa/cibuildwheel@v3.3.0
+        uses: pypa/cibuildwheel@v4.3.5
         env:
           CIBW_ARCHS_WINDOWS: auto ARM64
       - uses: actions/upload-artifact@v4
@@ -48,6 +48,9 @@ jobs:
         uses: pypa/cibuildwheel@v2.21.3
         env:
           CIBW_PLATFORM: pyodide
+          # This cibuildwheel builds for Pyodide 0.26, which bundles packaging
+          # 23.2; pytest 9.2 needs packaging>=24 and breaks the test venv.
+          CIBW_TEST_REQUIRES: "pytest<9.2"
       - uses: actions/upload-artifact@v4
         with:
           name: pyodide-wheel
@@ -62,11 +65,18 @@ jobs:
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.9'
+          python-version: '3.14'
       - name: Build
         run: |
           python -m pip install build
           python -m build --sdist
+      - name: Build from the sdist and test
+        # Run from outside the checkout so the tests import the installed
+        # package, not the uncompiled pysdd/ folder.
+        run: |
+          python -m pip install pytest dist/*.tar.gz
+          cd "$RUNNER_TEMP"
+          python -m pytest "$GITHUB_WORKSPACE/tests"
       - name: Store artifacts
         uses: actions/upload-artifact@v4
         with:
